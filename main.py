@@ -103,6 +103,7 @@ class WhooshIndex:
 
 
 def print_all_products():
+    """Print all products in the database."""
     products = Product.select()
     for product in products:
         print(f"ID: {product.id}, Name: {product.name}, Description: {product.description}, Price: {product.price}, Stock: {product.quantity}")
@@ -114,10 +115,10 @@ def populate_test_database():
     """Populate the database with example data for testing purposes.
 
     This function creates example data in the database for testing purposes. The created data includes users, products,
-    tags, and transactions. The created users have ids 1, 2, and 3, and their corresponding passwords are 'password'.
-    The created products are a Sweater, a Scarf, a Beanie, and a Jacket. The Sweater and the Scarf have tags 'Winter'
-    and 'Clothing'. The Beanie has tag 'Clothing' and the Jacket has tag 'Outerwear'. The created transactions include
-    purchases of the Sweater and the Scarf by user 1, and a purchase of the Beanie by user 2.
+    tags, and transactions. The created users have ids 1 and 2. The created products are a Sweater, a Scarf, a Beanie,
+    and a Jacket. The Sweater and the Scarf have tags 'Winter' and 'Clothing'. The Beanie has tag 'Clothing'
+    and the Jacket has tag 'Outerwear'. The created transactions include purchases of the Sweater and the Scarf by user 1,
+    and a purchase of the Beanie by user 2.
     """
 
     # Create users
@@ -172,11 +173,13 @@ def clear_database():
 
 
 def create_tables():
+    """Create the tables for the models."""
     with db:
         db.create_tables([User, Product, Tag, Transaction, ProductTag])
 
 
 def main():
+    """Main function to run the Betsy Webshop application."""
     while True:
         print("\nBetsy Webshop Menu")
         print("1. Search for products")
@@ -190,6 +193,7 @@ def main():
 
         choice = input("Enter the number of your choice: ").strip()
 
+        # Validate user input
         try:
             choice = int(choice)
         except ValueError:
@@ -198,6 +202,7 @@ def main():
 
         print(f"User input: {choice}")
 
+        # Process user choice
         if choice == 1:
             term = input("Enter a search term: ")
             results = search(term)
