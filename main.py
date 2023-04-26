@@ -2,7 +2,6 @@ __winc_id__ = "d7b474e9b3a54d23bca54879a4f1855b"
 __human_name__ = "Betsy Webshop"
 
 
-# Importeer de nodige modellen uit models.py
 from models import db, User, Product, Tag, Transaction, ProductTag
 from whoosh.index import create_in
 from whoosh.fields import Schema, ID, TEXT
