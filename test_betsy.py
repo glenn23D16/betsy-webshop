@@ -18,6 +18,7 @@ from main import (
 
 
 class TestBetsy(unittest.TestCase):
+    user_counter = 1
     @classmethod
     def setUpClass(cls):
         db.create_tables([User, Product, Tag, ProductTag, Transaction])
@@ -28,6 +29,9 @@ class TestBetsy(unittest.TestCase):
 
     def setUp(self):
         main.populate_test_database()
+        user_name = f"Alice{TestBetsy.user_counter}"
+        TestBetsy.user_counter += 1
+        User.create(name=user_name, address="123 Main St", billing_info="Visa 1234")
 
     def tearDown(self):
         Transaction.delete().execute()
