@@ -214,11 +214,21 @@ def main():
             for product in products:
                 print(f"Product name: {product.name}, Description: {product.description}, Price: {product.price}, Quantity: {product.quantity}")
         elif choice == 3:
-            tag_id = int(input("Enter the tag ID: "))
-            product_tags = list_products_per_tag(tag_id)
-            for product_tag in product_tags:
-                product = product_tag.product
-                print(f"Product name: {product.name}, Description: {product.description}, Price: {product.price}, Quantity: {product.quantity}")
+            try:
+                tag_id = int(input("Enter the tag ID: "))
+                product_tags = list_products_per_tag(tag_id)
+                if product_tags:
+                    for product_tag in product_tags:
+                        product = product_tag.product
+                        print(f"Product name: {product.name}, Description: {product.description}, Price: {product.price}, Quantity: {product.quantity}")
+                else:
+                    print("No products found with the given tag ID. Please try again.")
+            except ValueError:
+                print("Invalid tag ID. Please enter a valid integer.")
+            except Tag.DoesNotExist:
+                print("The specified tag ID does not exist. Please try again.")
+            except Exception as e:
+                print(f"An error occurred: {e}. Please try again.")
 
         elif choice == 4:
             user_id = int(input("Enter the user ID: "))
